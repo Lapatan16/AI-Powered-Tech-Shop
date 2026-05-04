@@ -9,6 +9,13 @@ from alembic import context
 import os
 from dotenv import load_dotenv
 from src.entities.user_entity import UserEntity
+from src.entities.product_entity import ProductEntity
+from src.entities.category_entity import CategoryEntity
+from src.entities.product_in_cart_entity import ProductInCartEntity
+from src.entities.image_entity import ImageEntity
+from src.entities.product_cart_entity import ProductCartEntity
+from src.entities.cart_entity import CartEntity
+from src.entities.discount_entity import DiscountEntity
 
 load_dotenv()
 db_url = os.environ.get("MIGRATION_DB_CONNECTION")
