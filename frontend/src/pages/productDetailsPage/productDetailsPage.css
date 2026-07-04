@@ -1,0 +1,228 @@
+.product-detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--white);
+  min-height: 100vh;
+}
+
+.detail-breadcrumb {
+  margin-bottom: 24px;
+}
+
+.detail-breadcrumb button {
+  background: none;
+  border: none;
+  color: var(--charcoal-brown);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.detail-breadcrumb button:hover {
+  color: var(--pearl-aqua);
+}
+
+.product-detail-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+@media (min-width: 768px) {
+  .product-detail-layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+}
+
+.detail-header-block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.detail-main-title {
+  color: var(--charcoal-brown);
+  font-size: 2.25rem;
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.stock-pill-badge {
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.stock-pill-badge[data-instock="true"] {
+  background-color: var(--light-cyan);
+  color: var(--charcoal-brown);
+}
+
+.stock-pill-badge[data-instock="false"] {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.divider-bar {
+  border: 0;
+  height: 1px;
+  background-color: var(--light-cyan);
+  margin: 24px 0;
+}
+
+.detail-pricing-panel {
+  margin-bottom: 24px;
+}
+
+.detail-price-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.deal-incentive-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.percentage-pill {
+  background-color: var(--pearl-aqua);
+  color: var(--charcoal-brown);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.retail-strike {
+  color: var(--ash-grey);
+  text-decoration: line-through;
+  font-size: 1rem;
+}
+
+.active-deal-price {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--charcoal-brown);
+}
+
+.detail-text-description {
+  color: var(--charcoal-brown);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.purchase-controls-block {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (min-width: 480px) {
+  .purchase-controls-block {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.quantity-selector-rack {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.quantity-selector-rack label {
+  color: var(--charcoal-brown);
+  font-weight: 600;
+}
+
+.counter-btn-shell {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--ash-grey);
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: var(--white);
+}
+
+.counter-btn-shell button {
+  background: var(--light-cyan);
+  border: none;
+  width: 36px;
+  height: 36px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--charcoal-brown);
+  transition: background-color 0.1s;
+}
+
+.counter-btn-shell button:hover:not(:disabled) {
+  background-color: var(--pearl-aqua);
+}
+
+.counter-btn-shell button:disabled {
+  background-color: var(--white);
+  color: var(--light-cyan);
+  cursor: not-allowed;
+}
+
+.counter-btn-shell span {
+  width: 44px;
+  text-align: center;
+  font-weight: 700;
+  color: var(--charcoal-brown);
+}
+
+.add-to-cart-cta {
+  flex-grow: 1;
+  background-color: var(--charcoal-brown);
+  color: var(--white);
+  border: none;
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.1s ease, background-color 0.2s;
+  text-align: center;
+}
+
+.add-to-cart-cta:hover {
+  background-color: var(--pearl-aqua);
+  color: var(--charcoal-brown);
+}
+
+.add-to-cart-cta:active {
+  transform: scale(0.98);
+}
+
+.detail-status-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 16px;
+  color: var(--charcoal-brown);
+}
+
+.error-layout button {
+  background-color: var(--charcoal-brown);
+  color: var(--white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}

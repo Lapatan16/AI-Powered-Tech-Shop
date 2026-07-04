@@ -1,12 +1,8 @@
-from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import Depends
 
-from .users_repository import UsersRepository
 from .users_service import UsersService
-from ..database.db import get_db
 
-def get_users_repository(db_context: AsyncSession = Depends(get_db)) -> UsersRepository:
-    return UsersRepository(db_context)
+from ..database.unit_of_work import UnitOfWork
 
-def get_users_service(repo: UsersRepository = Depends(get_users_repository)) -> UsersService:
-    return UsersService(repo)
+def get_users_service(uow: UnitOfWork = Depends(UnitOfWork.get_unit_of_work)) -> UsersService:
+    return UsersService(uow)

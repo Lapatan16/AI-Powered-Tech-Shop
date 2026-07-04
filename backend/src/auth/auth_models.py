@@ -7,4 +7,3 @@ class LoginAuthModel(BaseModel):
 class AccessTokenResponseModel(BaseModel):
     access_token: str = Field()
     token_type: str = Field(default="bearer")
-

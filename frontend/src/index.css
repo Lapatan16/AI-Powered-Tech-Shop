@@ -1,0 +1,14 @@
+:root {
+  --white: #ffffffff;
+  --charcoal-brown: #3b413cff;
+  --ash-grey: #9db5b2ff;
+  --light-cyan: #daf0eeff;
+  --pearl-aqua: #94d1beff;
+  
+  --alert-red: #c53030;
+  --alert-red-bg: #fff5f5;
+  --success-green: #22543d;
+  --success-green-bg: #c6f6d5;
+  --warning-gold: #744210;
+  --warning-gold-bg: #feebc8;
+}

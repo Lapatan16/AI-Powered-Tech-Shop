@@ -15,7 +15,11 @@ from src.entities.product_in_cart_entity import ProductInCartEntity
 from src.entities.image_entity import ImageEntity
 from src.entities.product_cart_entity import ProductCartEntity
 from src.entities.cart_entity import CartEntity
-from src.entities.discount_entity import DiscountEntity
+from src.entities.sub_category_entity import SubCategoryEntity
+from src.entities.order_entity import OrderEntity
+from src.entities.order_item_entity import OrderItemEntity
+from src.entities.recommendation_entity import RecommendationEntity
+# from src.entities.discount_entity import DiscountEntity --- IGNORE ---
 
 load_dotenv()
 db_url = os.environ.get("MIGRATION_DB_CONNECTION")

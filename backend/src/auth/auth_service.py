@@ -1,31 +1,31 @@
 import bcrypt
 
-from .auth_repository import AuthRepository
 from .auth_exceptions import *
 from .jwt_helper import generate_access_token
 from .auth_models import LoginAuthModel
 
 from ..users.users_models import UserCreateModel
-from ..users.users_service import UsersService
 from ..users.users_exceptions import NotFoundError
+from ..database.unit_of_work import UnitOfWork
+from ..carts.carts_models import CartCreateModel
+from ..carts.carts_exceptions import CartCreateError
 
 class AuthService():
 
-    def __init__(self, repo: AuthRepository, users_service: UsersService):
-        self.__repo = repo
-        self.__users_service = users_service
+    def __init__(self, uow: UnitOfWork):
+        self.uow = uow
 
     async def register_user_async(self, user: UserCreateModel) -> str:
         same_user_name = None
         same_email = None
 
         try:
-            same_user_name = await self.__users_service.get_user_by_username(user.user_name)
+            same_user_name = await self.uow.users.find_user_by_username(user.user_name)
         except NotFoundError:
             same_user_name = None
 
         try:
-            same_email = await self.__users_service.get_user_by_email(user.email)
+            same_email = await self.uow.users.find_user_by_email(user.email)
         except NotFoundError:
             same_email = None
 
@@ -37,7 +37,11 @@ class AuthService():
 
         user.password = self.__hash_password(user.password)
 
-        new_user = await self.__repo.save_user_async(user)
+        new_user = await self.uow.auth.save_user_async(user)
+        new_cart = await self.uow.carts.create_cart_async(CartCreateModel(user_id=new_user.id))
+
+        if new_cart == None:
+            raise CartCreateError()
 
         access_token = generate_access_token({
             "sub": new_user.user_name,
@@ -47,7 +51,7 @@ class AuthService():
         return access_token
     
     async def login_user_async(self, user: LoginAuthModel) -> str:
-        user_from_db = await self.__repo.find_user_for_login(user.username)
+        user_from_db = await self.uow.auth.find_user_for_login(user.username)
 
         if not user_from_db:
             raise CredentialsDontMatchError()

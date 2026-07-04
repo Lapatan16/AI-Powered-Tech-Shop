@@ -6,7 +6,9 @@ from .auth_dependencies import get_auth_service
 from .auth_service import AuthService
 from .auth_exceptions import EmailAlreadyExistsError, UserNameAlreadyExistsError, CredentialsDontMatchError
 from .auth_models import AccessTokenResponseModel, LoginAuthModel
+
 from ..users.users_models import UserCreateModel
+from ..carts.carts_exceptions import CartCreateError
 
 router = APIRouter(
     prefix='/auth',
@@ -36,7 +38,10 @@ async def register(
         raise HTTPException(status.HTTP_409_CONFLICT, {
             "error": "email is already taken."
         })
-    
+    except CartCreateError:
+        raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, {
+            "error": "Failed to create cart for the new user."
+        })
 @router.post(
     "/login",
     response_model=AccessTokenResponseModel,

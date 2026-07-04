@@ -1,5 +1,5 @@
 from sqlmodel import SQLModel, Field, Relationship
-from typing import Optional, TYPE_CHECKING
+from typing import Optional, TYPE_CHECKING, List
 
 if TYPE_CHECKING:
     from .user_entity import UserEntity
@@ -9,7 +9,7 @@ class CartEntity(SQLModel, table=True):
     __tablename__="carts"
 
     id: int | None = Field(default=None, primary_key=True)
-    user_id: int = Field(foreign_key="users.id", nullable=False, index=True)
+    user_id: int = Field(foreign_key="users.id", nullable=False, index=True, unique=True)
 
     user: Optional["UserEntity"] = Relationship(back_populates="cart")
-    product_cart: Optional["ProductCartEntity"] = Relationship(back_populates="product_cart")
+    product_cart: List["ProductCartEntity"] = Relationship(back_populates="cart")

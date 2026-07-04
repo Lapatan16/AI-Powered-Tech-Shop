@@ -1,0 +1,172 @@
+.auth-page-container {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--light-cyan);
+  padding: 40px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.auth-card-panel {
+  background-color: var(--white);
+  border: 1px solid var(--ash-grey);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 440px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(59, 65, 60, 0.08);
+}
+
+.auth-card-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.auth-card-header h2 {
+  color: var(--charcoal-brown);
+  font-size: 1.85rem;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+.auth-card-header p {
+  color: var(--ash-grey);
+  font-size: 0.95rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.auth-status-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 24px;
+  line-height: 1.4;
+}
+
+.alert-danger {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ffcdd2;
+}
+
+.alert-success {
+  background-color: #e8f5e9;
+  color: #1b5e20;
+  border: 1px solid #c8e6c9;
+}
+
+.auth-form-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-input-group label {
+  color: var(--charcoal-brown);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-input-group input {
+  border: 1px solid var(--ash-grey);
+  border-radius: 6px;
+  padding: 12px 14px;
+  font-size: 1rem;
+  color: var(--charcoal-brown);
+  background-color: var(--white);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input-group input:focus {
+  outline: none;
+  border-color: var(--pearl-aqua);
+  box-shadow: 0 0 0 3px rgba(148, 209, 190, 0.25);
+}
+
+.form-input-group input::placeholder {
+  color: #c4d4d2;
+}
+
+.auth-submit-cta {
+  background-color: var(--charcoal-brown);
+  color: var(--white);
+  border: none;
+  padding: 14px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.auth-submit-cta:hover:not(:disabled) {
+  background-color: var(--pearl-aqua);
+  color: var(--charcoal-brown);
+}
+
+.auth-submit-cta:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.auth-submit-cta:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.auth-card-footer {
+  margin-top: 32px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--charcoal-brown);
+}
+
+.auth-card-footer p {
+  margin: 0;
+}
+
+.switch-mode-btn {
+  background: none;
+  border: none;
+  color: var(--pearl-aqua);
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 6px;
+  text-decoration: underline;
+  transition: color 0.15s;
+}
+
+.switch-mode-btn:hover {
+  color: var(--charcoal-brown);
+}
+
+.button-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: var(--white);
+  border-radius: 50%;
+  animation: spinAuth 0.8s linear infinite;
+}
+
+@keyframes spinAuth {
+  to { transform: rotate(360deg); }
+}

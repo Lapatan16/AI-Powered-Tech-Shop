@@ -1,0 +1,99 @@
+.not-found-container {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--light-cyan);
+  padding: 40px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  text-align: center;
+}
+
+.not-found-content {
+  background-color: var(--white);
+  border: 1px solid var(--ash-grey);
+  border-radius: 12px;
+  padding: 60px 40px;
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(59, 65, 60, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error-code-badge {
+  font-size: 6rem;
+  font-weight: 900;
+  color: var(--pearl-aqua);
+  line-height: 1;
+  letter-spacing: -2px;
+  margin-bottom: 16px;
+  user-select: none;
+  background: linear-gradient(135deg, var(--pearl-aqua), var(--charcoal-brown));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.not-found-header h1 {
+  color: var(--charcoal-brown);
+  font-size: 2rem;
+  margin: 0 0 12px 0;
+  font-weight: 700;
+}
+
+.not-found-header p {
+  color: var(--ash-grey);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0 0 32px 0;
+}
+
+.not-found-actions {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  justify-content: center;
+}
+
+.nav-cta {
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.nav-cta.btn-primary {
+  background-color: var(--charcoal-brown);
+  color: var(--white);
+}
+
+.nav-cta.btn-primary:hover {
+  background-color: var(--pearl-aqua);
+  color: var(--charcoal-brown);
+}
+
+.nav-cta.btn-secondary {
+  background-color: transparent;
+  color: var(--charcoal-brown);
+  border: 1px solid var(--ash-grey);
+}
+
+.nav-cta.btn-secondary:hover {
+  background-color: var(--light-cyan);
+  border-color: var(--charcoal-brown);
+}
+
+@media (max-width: 480px) {
+  .not-found-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .nav-cta {
+    width: 100%;
+  }
+}
