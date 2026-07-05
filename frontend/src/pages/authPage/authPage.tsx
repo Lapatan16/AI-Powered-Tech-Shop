@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { authService } from '../../services/authService';
 import { useAuth } from '../../context/authContext';
-import './AuthPage.css';
+import './authPage.css';
 
 export const AuthPage: React.FC = () => {
   const { login } = useAuth();

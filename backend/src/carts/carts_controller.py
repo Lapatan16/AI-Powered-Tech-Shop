@@ -3,8 +3,6 @@ from typing import Annotated
 
 from .carts_models import (
     CartResponseModel,
-    CartCreateModel,
-    CartMinResponseModel,
     CartAddProductModel,
     CartUpdateModel
 )

@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { productService } from '../../services/productService';
 import { type ProductCreateModel } from '../../types/product';
 import { type CategoryTreeModel } from '../../types/category';
-import './CreateProductPage.css';
+import './createProductPage.css';
 
 export const CreateProductPage: React.FC = () => {
   const [name, setName] = useState<string>('');

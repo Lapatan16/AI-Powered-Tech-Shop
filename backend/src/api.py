@@ -5,7 +5,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict
 from fastapi.staticfiles import StaticFiles
 
-
 from .auth.auth_controller import router as auth_router
 from .users.users_controller import router as users_router
 from .products.products_controller import router as products_router

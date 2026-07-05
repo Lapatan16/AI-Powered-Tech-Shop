@@ -148,3 +148,20 @@
     grid-template-columns: 1fr;
   }
 }
+
+.return-shop-btn {
+  background-color: var(--charcoal-brown);
+  color: var(--white);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.return-shop-btn:hover {
+  background-color: var(--pearl-aqua);
+  color: var(--charcoal-brown);
+}

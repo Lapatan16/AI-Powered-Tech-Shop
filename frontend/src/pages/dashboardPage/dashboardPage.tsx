@@ -48,7 +48,7 @@ export const DashboardPage: React.FC = () => {
     <div className="dashboard-root-container">
       <div className="dashboard-header-row">
         <div>
-          <h2 className="dashboard-title">✨ Seller Command Center</h2>
+          <h2 className="dashboard-title">Seller Command Center</h2>
           <p className="dashboard-subtitle">Monitor storefront performance margins and operational stock logs.</p>
         </div>
         <button className="create-product-trigger-btn" onClick={handleNavigateToCreate}>
@@ -116,7 +116,7 @@ export const DashboardPage: React.FC = () => {
           </div>
 
           <div className="chart-wrapper-card small-chart">
-            <h4>🍩 Niche Value Distribution</h4>
+            <h4>📉 Top Selling Categories</h4>
             <div style={{ width: '100%', height: 200, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <ResponsiveContainer width="100%" height={200}>
                 <PieChart margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>

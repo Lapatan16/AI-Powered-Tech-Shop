@@ -7,13 +7,11 @@ from selenium.webdriver.support.ui import Select
 
 BASE_URL = "http://localhost:5173"
 
-
 def login(driver, wait):
     driver.get(f"{BASE_URL}/login")
     wait.until(EC.presence_of_element_located((By.ID, "username-field"))).send_keys("testsubject")
     driver.find_element(By.ID, "password-field").send_keys("Sifra123", Keys.RETURN)
     wait.until(EC.url_to_be(f"{BASE_URL}/"))
-
 
 @pytest.mark.e2e
 def test_add_to_cart_flow(driver):
@@ -33,7 +31,6 @@ def test_add_to_cart_flow(driver):
     assert alert.text == 'Success: Added 1 unit(s) of "Logitech MX Master 3S" to your cart!'
     alert.accept()
 
-
 @pytest.mark.e2e
 def test_remove_from_cart(driver):
     wait = WebDriverWait(driver, 10)
@@ -48,7 +45,6 @@ def test_remove_from_cart(driver):
     remove_btn.click()
 
     assert wait.until(EC.presence_of_element_located((By.CLASS_NAME, "return-shop-btn"))).is_displayed()
-
 
 @pytest.mark.e2e
 def test_checkout_flow(driver):
@@ -79,7 +75,6 @@ def test_checkout_flow(driver):
     alert = driver.switch_to.alert
     assert "Success" in alert.text
     alert.accept()
-
 
 @pytest.mark.e2e
 def test_ai_product_generation(driver):

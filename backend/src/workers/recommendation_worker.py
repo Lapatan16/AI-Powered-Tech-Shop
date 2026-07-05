@@ -18,10 +18,6 @@ class AIRecommendationsOutput(BaseModel):
 
 
 async def build_recommendations_for_user(session, user_id: int, catalog_data: list[dict]):
-    """
-    Accepts an isolated, existing active database session context 
-    to prevent connection leakage or event loop starvation.
-    """
     try:
         order_stmt = select(OrderItemEntity).join(OrderEntity).where(OrderEntity.user_id == user_id)
         order_result = await session.execute(order_stmt)
@@ -76,9 +72,6 @@ async def run_single_recommendation_flow(user_id: int):
 
 
 async def run_recommendation_cron_worker():
-    """
-    Global background service scheduler routine (Can still be executed via CLI main)
-    """
     async for session in get_db():
         async with UnitOfWork(session) as uow:
             from ..products.products_query import ProductQueryParams

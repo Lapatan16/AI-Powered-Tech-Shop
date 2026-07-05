@@ -1,7 +1,7 @@
 import React from 'react';
 import { type ProductMinimalModel } from '../../types/product';
 import { ProductCard } from '../productCard/productCard';
-import './ProductGrid.css';
+import './productGrid.css';
 
 interface ProductGridProps {
   products: ProductMinimalModel[];

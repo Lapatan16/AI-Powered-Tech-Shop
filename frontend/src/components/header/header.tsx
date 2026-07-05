@@ -24,7 +24,6 @@ export const Header: React.FC = () => {
   }, []);
 
   const handleNavigate = (path: string) => {
-    // If you use React Router, change this method to: navigate(path)
     window.history.pushState({}, '', path);
     const navEvent = new PopStateEvent('popstate');
     window.dispatchEvent(navEvent);
@@ -35,7 +34,7 @@ export const Header: React.FC = () => {
       <div className="header-inner-container">
         <div className="header-left-pane">
           <button className="nav-home-logo-btn" onClick={() => handleNavigate('/')}>
-            <span className="logo-accent">E</span>-Store
+            <span className="logo-accent">AI</span>-Powered Tech Shop
           </button>
           
           <nav className="header-nav-bar" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
