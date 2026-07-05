@@ -14,48 +14,6 @@ router = APIRouter(
 )
 
 usersServiceDependency = Annotated[UsersService, Depends(get_users_service)]
-
-@router.get(
-    "/",
-    response_model=list[UserResponseModel],
-    status_code=status.HTTP_200_OK
-)
-async def get_all_users_async(
-    users_service: usersServiceDependency
-) -> list[UserResponseModel]:
-    return await users_service.get_all_users_async()
-
-@router.get(
-    '/user_name/{user_name}',
-    response_model=UserResponseModel,
-    status_code=status.HTTP_200_OK
-)
-async def get_user_by_username(
-    user_name: str,
-    users_service: usersServiceDependency
-) -> UserResponseModel:
-    try:
-        return await users_service.get_user_by_username(user_name)
-    except NotFoundError as e:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, detail={
-            "error": str(e)
-        })
-
-@router.get(
-    '/email/{email}',
-    response_model=UserResponseModel,
-    status_code=status.HTTP_200_OK
-)
-async def get_user_by_email(
-    email: str,
-    users_service: usersServiceDependency
-) -> UserResponseModel:
-    try:
-        return await users_service.get_user_by_email(email)
-    except NotFoundError as e:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, detail={
-            "error": str(e)
-        })
     
 @router.get(
     "/current_user",

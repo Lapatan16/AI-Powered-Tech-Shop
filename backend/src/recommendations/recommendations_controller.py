@@ -28,6 +28,6 @@ async def autocomplete_product_fields(
         return await rec_service.autocomplete_product_fields_async(payload.user_prompt)
     except ValueError as ex:
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail=str(ex)
         )

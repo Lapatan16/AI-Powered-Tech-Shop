@@ -20,31 +20,6 @@ router = APIRouter(
     tags=["Carts"]
 )
 
-@router.post('/', response_model=CartMinResponseModel)
-async def create_cart(
-    cart: CartCreateModel,
-    carts_service: Annotated[CartsService, Depends(get_carts_service)]
-):
-    try:
-        newCart = await carts_service.create_cart_async(cart)
-    except Exception:
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(f"Failed to create cart."))
-    
-    return newCart
-
-@router.delete('/{cart_id}')
-async def delete_cart(
-    cart_id: int,
-    carts_service: Annotated[CartsService, Depends(get_carts_service)]
-):
-    try:
-        await carts_service.delete_cart_async(cart_id)
-    except Exception:
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(f"Failed to delete cart with id {cart_id}."))
-    
-    return Response(status_code=status.HTTP_204_NO_CONTENT)
-
-
 @router.get('/items', response_model=CartResponseModel)
 async def get_cart_for_user(
     carts_service: Annotated[CartsService, Depends(get_carts_service)],
