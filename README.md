@@ -1,6 +1,6 @@
 # AI Powered Tech Shop
 
-AI Powered Tech Shop je web aplikacija namenjena kupovini i prodaji bele tehnike. Projekat je razvijen u okviru predmeta **WEB2**, sa ciljem da se klasična online prodavnica unapredi korišćenjem veštačke inteligencije.
+AI Powered Tech Shop je web aplikacija namenjena kupovini i prodaji bele tehnike. Projekat je razvijen u okviru predmeta **WEB2**, sa ciljem da se klasična online prodavnica unapredi korišćenjem veštačke inteligencijom.
 
 Glavna ideja projekta je da prodavcima olakša postavljanje oglasa. Nakon što daju kratak opis proizvoda, aplikacija koristi **Google Gemini** kako bi automatski predložila naziv proizvoda, opis, cenu i ostale informacije. Prodavac može da prihvati predlog ili da podatke izmeni ručno.
 
@@ -12,34 +12,41 @@ Kupcima je omogućena pretraga proizvoda, dodavanje proizvoda u korpu, kupovina,
 
 ### Autentifikacija korisnika
 
-* Registracija i prijava korisnika
-* JWT autentifikacija
-* Zaštićene rute
+- Registracija i prijava korisnika
+- JWT autentifikacija
+- Zaštićene rute
 
 ### Upravljanje proizvodima
 
-* Dodavanje proizvoda
-* Izmena postojećih proizvoda
-* Brisanje proizvoda
-* Pregled svih proizvoda
-* Pretraga proizvoda
-* Kategorije proizvoda
-* Upload slika proizvoda
+- Dodavanje proizvoda
+- Izmena postojećih proizvoda
+- Brisanje proizvoda
+- Pregled svih proizvoda
+- Pretraga proizvoda
 
 ### AI podrška
 
-* Automatsko generisanje naziva proizvoda
-* Generisanje opisa proizvoda
-* Predlog cene
-* Popunjavanje ostalih informacija
-* Integracija sa Google Gemini API-jem
+- Automatsko generisanje naziva proizvoda
+- Generisanje opisa proizvoda
+- Predlog cene
+- Popunjavanje ostalih informacija
+- Integracija sa Google Gemini API-jem
 
 ### Kupovina
 
-* Dodavanje proizvoda u korpu
-* Izmena sadržaja korpe
-* Kreiranje porudžbina
-* Pregled porudžbina
+- Dodavanje proizvoda u korpu
+- Izmena sadržaja korpe
+- Kreiranje porudžbina
+- Pregled porudžbina
+
+### Dashboard
+
+Prodavcima je dostupan dashboard sa osnovnim statistikama o prodaji, uključujući:
+
+- Ukupan prihod
+- Najprodavaniji proizvod
+- Najprodavaniju kategoriju
+- Pregled prodajnih trendova
 
 ### Preporuke proizvoda
 
@@ -51,40 +58,38 @@ Sistem generiše preporuke proizvoda na osnovu aktivnosti korisnika, odnosno nje
 
 ## Backend
 
-* Python
-* FastAPI
-* PostgreSQL
-* Alembic
-* Google Gemini API
-* JWT autentifikacija
+- Python
+- FastAPI
+- PostgreSQL
+- Alembic
+- Google Gemini API
+- JWT autentifikacija
 
 ## Frontend
 
-* React
-* Vite
-* JavaScript
-* CSS
+- React
+- Vite
+- JavaScript
+- CSS
 
 ---
 
 # Struktura projekta
 
-```
+```text
 AI-Powered-Tech-Shop
 │
 ├── backend
 │   ├── alembic
 │   ├── src
 │   ├── static
+│   ├── tests
 │   └── main.py
 │
 └── frontend
     ├── src
-    ├── public
-    └── package.json
+    └── public
 ```
-
-Backend je organizovan po slojevima (API, servisi, repozitorijumi i modeli), dok frontend koristi React aplikaciju razvijenu pomoću Vite-a.
 
 ---
 
@@ -94,10 +99,10 @@ Backend je organizovan po slojevima (API, servisi, repozitorijumi i modeli), dok
 
 Pre pokretanja projekta potrebno je instalirati:
 
-* Python 3.14+
-* Node.js
-* PostgreSQL
-* Git
+- Python 3.14+
+- Node.js
+- PostgreSQL
+- Git
 
 ---
 
@@ -115,7 +120,7 @@ cd AI-Powered-Tech-Shop
 
 Potrebno je napraviti PostgreSQL bazu pod nazivom:
 
-```
+```text
 ai-powered-tech-shop-db
 ```
 
@@ -164,13 +169,13 @@ python main.py
 
 Backend će biti dostupan na:
 
-```
+```text
 http://localhost:9061
 ```
 
 Swagger dokumentacija:
 
-```
+```text
 http://localhost:9061/docs
 ```
 
@@ -202,7 +207,7 @@ Pokretanje aplikacije:
 npm run dev
 ```
 
-Frontend će biti dostupan na adresi koju Vite ispiše u terminalu (najčešće http://localhost:5173).
+Frontend će biti dostupan na adresi koju Vite ispiše u terminalu (najčešće `http://localhost:5173`).
 
 ---
 
@@ -210,7 +215,7 @@ Frontend će biti dostupan na adresi koju Vite ispiše u terminalu (najčešće 
 
 Sve slike koje korisnici otpreme čuvaju se lokalno u direktorijumu:
 
-```
+```text
 backend/static/uploads
 ```
 
@@ -238,27 +243,50 @@ Backend je organizovan korišćenjem višeslojne arhitekture.
 
 Projekat koristi:
 
-* Repository pattern
-* Service layer
-* Unit of Work pattern
-* JWT autentifikaciju
-* Asinhroni pristup bazi podataka
-* Pozadinske radnike za obradu preporuka
+- Repository pattern
+- Service layer
+- Unit of Work pattern
+- JWT autentifikaciju
+- Asinhroni pristup bazi podataka
+- Pozadinske radnike za obradu preporuka
 
 Ovakva organizacija omogućava lakše održavanje i proširenje aplikacije.
 
 ---
 
-# Buduća unapređenja
+# Testiranje
 
-Neke od mogućih nadogradnji projekta:
+Projekat sadrži ukupno **52 automatska testa**, kao i mogućnost ručnog testiranja API-ja.
 
-* Deploy aplikacije
-* Naprednije preporuke proizvoda
-* Više AI funkcionalnosti
-* Notifikacije korisnicima
-* Ocene i komentari proizvoda
-* Plaćanje putem eksternih servisa
+### Unit testovi
+
+Backend sadrži **48 unit testova** koji proveravaju ispravnost poslovne logike, servisa i ostalih ključnih komponenti sistema.
+
+Pokretanje svih unit testova:
+
+```bash
+cd backend
+python -m pytest tests/unit
+```
+
+### End-to-End testovi
+
+Frontend funkcionalnosti testirane su pomoću **4 Selenium e2e testa** koji simuliraju rad korisnika kroz aplikaciju.
+
+Pokretanje e2e testova:
+
+```bash
+cd backend
+python -m pytest tests/e2e
+```
+
+### Ručno testiranje
+
+API je moguće testirati i ručno korišćenjem Swagger dokumentacije na adresi:
+
+```text
+http://localhost:9061/docs
+```
 
 ---
 
@@ -266,4 +294,6 @@ Neke od mogućih nadogradnji projekta:
 
 Projekat je razvijen u okviru predmeta **WEB2**.
 
-Autor: **Mateja Lapatanović**
+- Profesor: **Branko Arsić**
+- Saradnik u nastavi: **Andreja Živić**
+- Autor: **Mateja Lapatanović**
