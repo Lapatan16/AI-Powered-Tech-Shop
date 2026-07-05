@@ -6,7 +6,8 @@ from .products_models import (
     ProductDetailsModel,
     ProductsPreviewModel,
     ProductsMinimalModel,
-    CategoryResponseModel
+    CategoryResponseModel,
+    ProductsUpdateModel
 )
 
 from ..database.unit_of_work import UnitOfWork
@@ -56,11 +57,54 @@ class ProductsService():
         )
 
         return ProductsMinimalModel.from_entity(new_product)
-        
-    async def delete_product_async(self, product_id: int) -> None:
-        await self.uow.products.delete_product_async(product_id)
 
     async def get_product_categories_and_subcategories_async(self) -> list[CategoryResponseModel]:
         categories = await self.uow.products.find_product_categories_and_subcategories_async()
 
         return [CategoryResponseModel.from_entity(category) for category in categories]
+    
+    async def get_seller_products_async(
+        self, 
+        user_id: int, 
+        page: int, 
+        limit: int
+    ) -> tuple[list[ProductsPreviewModel], int]:
+        entities, total_records = await self.uow.products.find_seller_products_paginated_async(user_id, page, limit)
+        models = [ProductsPreviewModel.from_entity(entity) for entity in entities]
+        return models, total_records
+
+    async def update_product_async(
+        self, 
+        product_id: int, 
+        user_id: int, 
+        model: ProductsUpdateModel
+    ) -> ProductsMinimalModel:
+        product = await self.uow.products.find_product_by_id_async(product_id)
+        
+        if product is None or product.is_deleted:
+            raise ProductNotFoundError(f"Product with id {product_id} not found")
+            
+        if product.user_id != user_id:
+            raise PermissionError("You do not own this product listing.")
+
+        updated_entity = await self.uow.products.update_product_async(
+            product_id=product_id,
+            name=model.name,
+            description=model.description,
+            sub_category_id=model.sub_category_id,
+            price=model.price,
+            stock=model.stock,
+            discount=model.discount
+        )
+        return ProductsMinimalModel.from_entity(updated_entity)
+
+    async def delete_product_secure_async(self, product_id: int, user_id: int) -> None:
+        product = await self.uow.products.find_product_by_id_async(product_id)
+        
+        if product is None or product.is_deleted:
+            raise ProductNotFoundError(f"Product with id {product_id} not found")
+            
+        if product.user_id != user_id:
+            raise PermissionError("You do not own this product listing.")
+            
+        await self.uow.products.delete_product_async(product_id)

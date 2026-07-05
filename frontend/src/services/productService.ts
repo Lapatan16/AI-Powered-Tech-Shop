@@ -1,9 +1,11 @@
+import type { CategoryTreeModel } from '../types/category';
 import {
   type AiProductPredictionModel,
   type PaginatedProductsModel,
   type ProductCreateModel,
   type ProductDetailModel,
-  type ProductMinimalModel
+  type ProductMinimalModel,
+  type ProductUpdateModel
 } from '../types/product';
 import { apiClient } from './apiClient';
 
@@ -83,5 +85,35 @@ export const productService = {
         'Content-Type': 'application/json'
       }
     });
+  },
+
+  async getSellerProductsAsync(page: number = 1, limit: number = 10): Promise<PaginatedProductsModel> {
+    return apiClient.requestAsync<PaginatedProductsModel>(`/products/seller/mine?page=${page}&limit=${limit}`, {
+      method: 'GET'
+    });
+  },
+
+  async updateProductAsync(productId: number, data: ProductUpdateModel): Promise<ProductMinimalModel> {
+    return apiClient.requestAsync<ProductMinimalModel>(`/products/${productId}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+  },
+
+  async deleteProductAsync(productId: number): Promise<void> {
+    return apiClient.requestAsync<void>(`/products/${productId}`, {
+      method: 'DELETE'
+    });
+  },
+
+  async getAllCategoriesAsync(): Promise<CategoryTreeModel[]> {
+    const response = await fetch('http://localhost:9061/products/categories/all');
+    if (!response.ok) {
+      throw new Error('Failed to fetch category selections.');
+    }
+    return response.json();
   }
 }

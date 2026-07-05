@@ -135,26 +135,12 @@
   font-size: 1rem;
   cursor: pointer;
   margin-top: 16px;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .checkout-cta-btn:hover {
   background-color: var(--pearl-aqua);
   color: var(--charcoal-brown);
-}
-
-.header-cart-icon-btn {
-  background-color: var(--light-cyan);
-  border: 1px solid var(--ash-grey);
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  color: var(--charcoal-brown);
-}
-
-.header-cart-icon-btn:hover {
-  background-color: var(--pearl-aqua);
 }
 
 @media (max-width: 768px) {

@@ -8,6 +8,9 @@
 
 .dashboard-header-row {
   margin-bottom: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .dashboard-title {
@@ -21,6 +24,35 @@
   font-size: 14px;
   color: var(--ash-grey);
   margin: 0;
+}
+
+.create-product-trigger-btn {
+  background: #3b413c;
+  color: var(--white, #ffffff);
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 6px -1px rgba(59, 65, 60, 0.1);
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+}
+
+.create-product-trigger-btn:hover {
+  background: #2a2e2b;
+}
+
+.create-product-trigger-btn:active {
+  transform: scale(0.98);
+}
+
+.plus-symbol-icon {
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .metrics-summary-grid {

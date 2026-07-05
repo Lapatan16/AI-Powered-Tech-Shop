@@ -5,7 +5,7 @@ import os
 import uuid
 
 from .products_query import PaginatedEnvelope, ProductQueryParams
-from .products_models import ProductsMinimalModel, ProductsPreviewModel
+from .products_models import ProductsPreviewModel, ProductsMinimalModel, ProductsUpdateModel
 from .products_exceptions import ProductNotFoundError
 from .products_dependencies import get_products_service
 from .products_service import ProductsService
@@ -108,11 +108,52 @@ async def get_product_categories_and_subcategories(
 ):
     return await service.get_product_categories_and_subcategories_async()
 
+@router.get(
+    '/seller/mine', 
+    response_model=PaginatedEnvelope[ProductsPreviewModel],
+    status_code=status.HTTP_200_OK
+)
+async def get_seller_products(
+    service: Annotated[ProductsService, Depends(get_products_service)],
+    current_user: Annotated[UserResponseModel, Depends(get_current_user)],
+    page: int = 1,
+    limit: int = 10
+):
+    items, total_records = await service.get_seller_products_async(current_user.id, page, limit)
+    total_pages = math.ceil(total_records / limit) if total_records > 0 else 1
+
+    return PaginatedEnvelope(
+        items=items,
+        total_records=total_records,
+        page=page,
+        limit=limit,
+        total_pages=total_pages
+    )
+
+@router.put('/{product_id}', response_model=ProductsMinimalModel)
+async def update_product(
+    product_id: int,
+    model: ProductsUpdateModel,
+    service: Annotated[ProductsService, Depends(get_products_service)],
+    current_user: Annotated[UserResponseModel, Depends(get_current_user)]
+):
+    try:
+        return await service.update_product_async(product_id, current_user.id, model)
+    except ProductNotFoundError as e:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, detail={"error": str(e)})
+    except PermissionError as e:
+        raise HTTPException(status.HTTP_403_FORBIDDEN, detail={"error": str(e)})
+
 @router.delete('/{product_id}')
 async def delete_product(
     product_id: int,
-    service: Annotated[ProductsService, Depends(get_products_service)]
+    service: Annotated[ProductsService, Depends(get_products_service)],
+    current_user: Annotated[UserResponseModel, Depends(get_current_user)]
 ):
-    await service.delete_product_async(product_id)
-
-    return Response(status_code=status.HTTP_204_NO_CONTENT)
+    try:
+        await service.delete_product_secure_async(product_id, current_user.id)
+        return Response(status_code=status.HTTP_204_NO_CONTENT)
+    except ProductNotFoundError as e:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, detail={"error": str(e)})
+    except PermissionError as e:
+        raise HTTPException(status.HTTP_403_FORBIDDEN, detail={"error": str(e)})

@@ -213,3 +213,55 @@ class ProductsRepository():
             "category_distribution": category_distribution,
             "stock_vs_sales": stock_vs_sales
         }
+    
+    async def find_seller_products_paginated_async(
+        self, 
+        user_id: int, 
+        page: int, 
+        limit: int
+    ) -> tuple[list[ProductEntity], int]:
+        offset = (page - 1) * limit
+        
+        statement = (
+            select(ProductEntity)
+            .options(selectinload(ProductEntity.images))
+            .where(ProductEntity.user_id == user_id, ProductEntity.is_deleted == False)
+            .order_by(desc(ProductEntity.id))
+        )
+
+        count_statement = select(func.count()).select_from(statement.subquery())
+        count_result = await self.__db_context.execute(count_statement)
+        total_records = count_result.scalar_one()
+
+        statement = statement.offset(offset).limit(limit)
+        result = await self.__db_context.execute(statement)
+        entities = result.scalars().all()
+
+        return entities, total_records
+
+    async def update_product_async(
+        self, 
+        product_id: int, 
+        name: str, 
+        description: str, 
+        sub_category_id: int, 
+        price: float, 
+        stock: int, 
+        discount: float
+    ) -> ProductEntity | None:
+        statement = select(ProductEntity).where(ProductEntity.id == product_id, ProductEntity.is_deleted == False)
+        result = await self.__db_context.execute(statement)
+        product = result.scalars().first()
+
+        if product is not None:
+            product.name = name
+            product.description = description
+            product.sub_category_id = sub_category_id
+            product.price = price
+            product.stock = stock
+            product.discount = discount
+            
+            self.__db_context.add(product)
+            await self.__db_context.flush()
+            
+        return product

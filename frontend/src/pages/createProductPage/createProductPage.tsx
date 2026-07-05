@@ -28,21 +28,22 @@ export const CreateProductPage: React.FC = () => {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   useEffect(() => {
+    let isMounted = true;
     const fetchNavigationTree = async () => {
       try {
-        const response = await fetch('http://localhost:9061/products/categories/all');
-        if (response.ok) {
-          const data = await response.json();
+        const data = await productService.getAllCategoriesAsync();
+        if (isMounted) {
           setCategories(data);
-        } else {
-          setErrorMessage('Failed to fetch product selection categories.');
         }
-      } catch (error) {
+      } catch (error: any) {
         console.error('Failed to load menu layers:', error);
-        setErrorMessage('Could not load categories from backend.');
+        if (isMounted) {
+          setErrorMessage(error.message || 'Could not load categories from backend.');
+        }
       }
     };
     fetchNavigationTree();
+    return () => { isMounted = false; };
   }, []);
 
   const handleCategoryChange = (e: ChangeEvent<HTMLSelectElement>) => {

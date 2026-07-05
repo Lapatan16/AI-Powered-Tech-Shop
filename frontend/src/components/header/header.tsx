@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { type CategoryTreeModel } from '../../types/category';
+import { productService } from '../../services/productService';
 import { useAuth } from '../../context/authContext';
-import './Header.css';
+import './header.css';
 
 export const Header: React.FC = () => {
   const { user, isAuthenticated, logout } = useAuth();
@@ -9,19 +10,24 @@ export const Header: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
 
   useEffect(() => {
+    let isMounted = true;
     const fetchNavigationTree = async () => {
       try {
-        const response = await fetch('http://localhost:9061/products/categories/all');
-        if (response.ok) setCategories(await response.json());
+        const data = await productService.getAllCategoriesAsync();
+        if (isMounted) setCategories(data);
       } catch (error) {
         console.error('Failed to load menu layers:', error);
       }
     };
     fetchNavigationTree();
+    return () => { isMounted = false; };
   }, []);
 
   const handleNavigate = (path: string) => {
-    window.location.href = path;
+    // If you use React Router, change this method to: navigate(path)
+    window.history.pushState({}, '', path);
+    const navEvent = new PopStateEvent('popstate');
+    window.dispatchEvent(navEvent);
   };
 
   return (
@@ -75,7 +81,6 @@ export const Header: React.FC = () => {
         <div className="header-right-pane">
           {isAuthenticated && user ? (
             <div className="profile-badge-hub" style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-              
               <button className="header-cart-icon-btn" onClick={() => handleNavigate('/cart')}>
                 <span className="cart-graphic-symbol">&#128722;</span> Cart
               </button>

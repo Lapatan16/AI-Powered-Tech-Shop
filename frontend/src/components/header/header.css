@@ -24,6 +24,7 @@
   gap: 40px;
 }
 
+/* Home / Logo Button */
 .nav-home-logo-btn {
   background: none;
   border: none;
@@ -33,6 +34,11 @@
   color: var(--charcoal-brown);
   cursor: pointer;
   letter-spacing: -0.5px;
+  transition: opacity 0.2s ease;
+}
+
+.nav-home-logo-btn:hover {
+  opacity: 0.85;
 }
 
 .logo-accent {
@@ -60,11 +66,11 @@
   font-size: 1rem;
   cursor: pointer;
   height: 100%;
-  padding: 0 8px;
+  padding: 0 12px;
   display: flex;
   align-items: center;
   gap: 6px;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 .menu-trigger-btn:hover,
@@ -151,7 +157,8 @@
   align-items: center;
 }
 
-.auth-btn-group {
+.auth-btn-group, 
+.profile-badge-hub {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -159,64 +166,68 @@
 
 .auth-btn {
   border: none;
-  padding: 8px 18px;
+  padding: 8px 14px;
   font-size: 0.9rem;
   font-weight: 600;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
+  transition: all 0.2s ease;
+}
+
+.auth-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 65, 60, 0.08);
 }
 
 .btn-secondary {
   background-color: transparent;
   color: var(--charcoal-brown);
+  border: 1px solid var(--light-cyan);
+  border-radius: 20px;
 }
 
 .btn-secondary:hover {
   background-color: var(--light-cyan);
+  border-color: var(--light-cyan);
 }
 
 .btn-primary {
   background-color: var(--charcoal-brown);
   color: var(--white);
+  border: 1px solid var(--charcoal-brown);
 }
 
 .btn-primary:hover {
   background-color: var(--pearl-aqua);
+  border-color: var(--pearl-aqua);
   color: var(--charcoal-brown);
 }
 
+.header-cart-icon-btn,
 .profile-avatar-btn {
   background: none;
   border: 1px solid var(--light-cyan);
   padding: 8px 14px;
   border-radius: 20px;
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--charcoal-brown);
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 8px;
-  transition: border-color 0.2s;
+  transition: all 0.2s ease;
 }
 
+.header-cart-icon-btn:hover,
 .profile-avatar-btn:hover {
   border-color: var(--pearl-aqua);
+  background-color: transparent;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 65, 60, 0.08);
 }
 
+.cart-graphic-symbol,
 .avatar-icon {
   font-size: 1.1rem;
-}
-
-.ai-recommendations-btn {
-  background-color: transparent;
-  border: 1px dashed var(--pearl-aqua);
-  color: var(--charcoal-brown);
-  transition: all 0.2s ease-in-out;
-}
-
-.ai-recommendations-btn:hover {
-  background-color: var(--light-cyan);
-  border-style: solid;
-  transform: translateY(-1px);
 }

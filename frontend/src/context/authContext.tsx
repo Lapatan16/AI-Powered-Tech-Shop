@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 interface UserProfile {
   id: number;
@@ -16,15 +16,19 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<UserProfile | null>(null);
-
-  useEffect(() => {
+  const [user, setUser] = useState<UserProfile | null>(() => {
     const cachedUser = localStorage.getItem('user_profile');
     const cachedToken = localStorage.getItem('auth_token');
     if (cachedUser && cachedToken) {
-      setUser(JSON.parse(cachedUser));
+      try {
+        return JSON.parse(cachedUser);
+      } catch (e) {
+        console.error("Failed to parse cached user", e);
+        return null;
+      }
     }
-  }, []);
+    return null;
+  });
 
   const login = (token: string, userProfile: UserProfile) => {
     localStorage.setItem('auth_token', token);

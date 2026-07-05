@@ -133,3 +133,11 @@ class CategoryResponseModel(BaseModel):
             name=entity.name,
             sub_categories=sub_categories_dto
         )
+
+class ProductsUpdateModel(BaseModel):
+    name: str = Field()
+    description: str = Field()
+    sub_category_id: int = Field()
+    price: float = Field()
+    stock: int = Field()
+    discount: float = Field(default=0.0)

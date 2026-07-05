@@ -19,6 +19,8 @@ export interface ProductMinimalModel {
   id: number;
   name: string;
   price: number;
+  stock: number;
+  sub_category_id: number;
   discount: number;
   image: string | null;
 }
@@ -61,4 +63,42 @@ export interface AiProductPredictionModel {
   price: number;
   stock: number;
   discount: number;
+}
+
+export interface ProductUpdateModel {
+  name: string;
+  description: string;
+  sub_category_id: number;
+  price: number;
+  stock: number;
+  discount: number;
+}
+
+export interface BackendCategoryMinimal {
+  id: number;
+  name: string;
+}
+
+export interface BackendSubCategoryMinimal {
+  id: number;
+  name: string;
+  category: BackendCategoryMinimal;
+}
+
+export interface BackendSellerMinimal {
+  id: number;
+  user_name: string;
+  email: string;
+}
+
+export interface BackendProductDetail {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  stock: number;
+  discount: number;
+  images: string[];
+  seller: BackendSellerMinimal;
+  sub_category: BackendSubCategoryMinimal;
 }
