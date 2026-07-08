@@ -2,6 +2,7 @@ from ast import List
 from sqlalchemy import asc, desc, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload, joinedload
+from datetime import datetime, timedelta
 
 from .products_query import ProductQueryParams
 
@@ -179,6 +180,24 @@ class ProductsRepository():
         )
         trend_res = await self.__db_context.execute(trend_stmt)
         revenue_trend = [{"date": row[0], "revenue": float(row[1])} for row in trend_res.tuples().all()]
+
+        if revenue_trend:
+            trend_map = {item["date"]: item["revenue"] for item in revenue_trend}
+            
+            start_date = datetime.strptime(revenue_trend[0]["date"], "%Y-%m-%d").date()
+            end_date = datetime.now().date()
+            
+            filled_trend = []
+            curr_date = start_date
+            while curr_date <= end_date:
+                date_str = curr_date.strftime("%Y-%m-%d")
+                filled_trend.append({
+                    "date": date_str,
+                    "revenue": trend_map.get(date_str, 0.0)
+                })
+                curr_date += timedelta(days=1)
+                
+            revenue_trend = filled_trend
 
         cat_stmt = (
             select(

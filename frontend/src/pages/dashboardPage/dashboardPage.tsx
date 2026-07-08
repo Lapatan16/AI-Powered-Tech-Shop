@@ -109,7 +109,7 @@ export const DashboardPage: React.FC = () => {
                   <XAxis dataKey="date" stroke="#9db5b2" fontSize={11} tickLine={false} />
                   <YAxis stroke="#9db5b2" fontSize={11} tickLine={false} tickFormatter={(v) => `$${v}`} />
                   <Tooltip contentStyle={{ background: '#ffffffff', borderColor: '#daf0eeff' }} formatter={(value: any) => [`$${parseFloat(value).toFixed(2)}`, 'Revenue']} />
-                  <Area type="monotone" dataKey="revenue" stroke="#3b413c" strokeWidth={2} fillOpacity={1} fill="url(#colorRevenue)" />
+                  <Area type="linear" dataKey="revenue" stroke="#3b413c" strokeWidth={2} fillOpacity={1} fill="url(#colorRevenue)" />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
